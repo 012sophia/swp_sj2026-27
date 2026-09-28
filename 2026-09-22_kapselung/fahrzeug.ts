@@ -22,18 +22,24 @@ export class Fahrzeug {
     this._geschwindigkeit = 0;
   }
 
-  // TODO HÜ: getter für kmStand und geschwindigkeit (lesen ja, schreiben nie).
-  // Muss zuerst ersetzt werden, damit die Tests kompilieren und echte Werte sehen.
+  // Lesen ja, schreiben nie: nur getter, keine setter für kmStand/geschwindigkeit.
   get kmStand(): number {
-    return 0;
+    return this._kmStand;
   }
 
   get geschwindigkeit(): number {
-    return 0;
+    return this._geschwindigkeit;
   }
 
-  // TODO HÜ: wirft, wenn v < 0 oder v > maxGeschwindigkeit.
-  setGeschwindigkeit(v: number): void {}
+  // Wirft, wenn v < 0 oder v > maxGeschwindigkeit.
+  setGeschwindigkeit(v: number): void {
+    if (v < 0 || v > this.maxGeschwindigkeit) {
+      throw new Error(
+        `Geschwindigkeit muss zwischen 0 und ${this.maxGeschwindigkeit} liegen (war ${v})`,
+      );
+    }
+    this._geschwindigkeit = v;
+  }
 
   // TODO HÜ: erhöht kmStand um geschwindigkeit * stunden.
   fahre(stunden: number): void {}
